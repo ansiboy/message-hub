@@ -1,7 +1,7 @@
 import { Callback } from "maishu-toolkit";
-import { Message } from "./data-context";
+import { ClientMessage } from "./data-context";
 
 export class Messenger {
-    static messageArrived = new Callback<Message>();
+    static messageArrived = new Callback<ClientMessage>();
 }
 

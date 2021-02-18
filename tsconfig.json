@@ -4,6 +4,8 @@
         "module": "commonjs",
         "experimentalDecorators": true,
         "strict": true,
-        "strictPropertyInitialization": false
-    }
+        "strictPropertyInitialization": false,
+        "jsx": "react"
+    },
+    "exclude": []
 }

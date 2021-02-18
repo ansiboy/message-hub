@@ -7,5 +7,11 @@ export let errors = Object.assign(baseErrors, {
         let name = "notSupportedDatabaseType";
         error.name = name;
         return error;
+    },
+    objectNotExists(typeName: string, id: string) {
+        let msg = `Data '${typeName}' is not exists with id '${id}'`;
+        let error = new Error(msg);
+        error.name = errors.objectNotExists.name;
+        return error;
     }
 });

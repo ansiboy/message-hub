@@ -80,7 +80,8 @@ export class MyDataContext extends DataContext {
 export let dataContext = createParameterDecorator<MyDataContext, ContextData>(async (ctx) => {
     if (ctx.data == null) throw new Error("Context data is null.");
 
-    let dc = DataHelper.createDataContext(MyDataContext, ctx.data.config.db);
+    let db = Object.assign({ entities: ["./data-context.js"] }, ctx.data.config.db);
+    let dc = DataHelper.createDataContext(MyDataContext, db);
     return dc;
 })
 
