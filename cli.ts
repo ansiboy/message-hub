@@ -75,7 +75,8 @@ async function setClient() {
     let dbConfig = Object.assign(config.db, { synchronize: true, entities: ["data-context.js"] } as typeof config.db);
     let dataContext = await DataHelper.createDataContext(MyDataContext, dbConfig);
 
-    dataContext.clients.insert({ name: clientName, createDateTime: new Date(Date.now()) });
+    await dataContext.clients.insert({ name: clientName, createDateTime: new Date(Date.now()) });
+    console.log(colors.green("添加客户端成功"))
 }
 
 async function start() {
