@@ -2,7 +2,6 @@ import * as React from "react";
 import { buttonOnClick } from "maishu-ui-toolkit";
 import { MyService } from "../service";
 import { getMessages } from "../messages";
-import { ProxyProcessor } from "maishu-node-mvc";
 
 let service = new MyService();
 let messages = getMessages();
@@ -43,11 +42,12 @@ export default class IndexPage extends React.Component<Props, State> {
                     <label className="col-sm-2 control-label">消息类型</label>
                     <div className="col-sm-10">
                         <select className="form-control"
+                            value={this.state.currentMessageName || ""}
                             ref={e => this.typeInput = e || this.typeInput}
                             onChange={e => {
                                 this.setState({ currentMessageName: e.target.value })
                             }}>
-                            {messageNames.map(o => <option value={o} selected={o == this.state.currentMessageName}>
+                            {messageNames.map(o => <option key={o} value={o}>
                                 {o}
                             </option>)}
                         </select>

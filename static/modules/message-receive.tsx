@@ -1,12 +1,11 @@
 import * as React from "react";
 import { io, ManagerOptions } from "socket.io-client";
 import { HeaderNames } from "../header-names";
-import { Messages } from "../messages";
 
 let extraHeaders: ManagerOptions["extraHeaders"] = {};
 extraHeaders[HeaderNames.clientName] = "settlement";
 
-const socket = io('http://127.0.0.1:6247/', { extraHeaders });
+const socket = io(`http://${location.host}/`, { extraHeaders });
 
 interface Props {
 
@@ -18,7 +17,7 @@ interface State {
     message: any
 }
 
-export default class ClientConnectPage extends React.Component<Props, State> {
+export default class MessageReceivePage extends React.Component<Props, State> {
     constructor(props: any) {
         super(props);
 
