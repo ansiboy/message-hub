@@ -7,5 +7,7 @@
         "strictPropertyInitialization": false,
         "jsx": "react"
     },
-    "exclude": []
+    "exclude": [
+        "static"
+    ]
 }

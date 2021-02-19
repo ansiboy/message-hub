@@ -13,11 +13,11 @@ let socket = io(`http://127.0.0.1:${config.port}`, {
     extraHeaders
 });
 
-type Message = { type: string, data: any, id: string };
+type Message = { name: string, data: any, id: string };
 let dataReceived = new Callback<Message>();
 
 socket.on("Payment", (data: any, id: string) => {
-    dataReceived.fire({ type: "Payment", data, id })
+    dataReceived.fire({ name: "Payment", data, id })
 
     console.log(data)
 })
@@ -26,7 +26,7 @@ describe("send message", function () {
     it("Payment", function () {
         return new Promise((resolve, reject) => {
             let func = function (args: Message) {
-                assert.strictEqual(args.type, "Payment");
+                assert.strictEqual(args.name, "Payment");
                 resolve({});
                 dataReceived.remove(func);
             }
@@ -34,7 +34,7 @@ describe("send message", function () {
             dataReceived.add(func);
 
             postData("/sendMessage", {
-                type: "Payment", data: { type: "Paypal", amount: 128 }
+                name: "Payment", data: { name: "Paypal", amount: 128 }
             })
         })
     })
@@ -43,7 +43,7 @@ describe("send message", function () {
         return new Promise((resolve, reject) => {
 
             let func = function (args: Message) {
-                assert.strictEqual(args.type, "Payment");
+                assert.strictEqual(args.name, "Payment");
 
                 postData("/messageReceived", { id: args.id })
 
@@ -55,7 +55,7 @@ describe("send message", function () {
             dataReceived.add(func);
 
             postData("/sendMessage", {
-                type: "Payment", data: { type: "Paypal", amount: 128 }
+                name: "Payment", data: { type: "Paypal", amount: 128 }
             })
 
         })

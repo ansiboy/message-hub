@@ -17,6 +17,9 @@ export async function start(config: Config) {
     if (!config.port) throw errors.argumentFieldNull("port", "config");
 
     let virtualPaths = getVirtualPaths("static");
+    delete virtualPaths["static/init.ts"];
+    delete virtualPaths["static/website-config.ts"];
+
     let data: ContextData = { config };
     let webServer = startServer({
         websiteDirectory: __dirname,
@@ -35,14 +38,14 @@ export async function start(config: Config) {
         let func = (msg: ClientMessage) => {
             if (msg.to == clientName) {
                 let args: EmitArguments = [msg.data, msg.id];
-                socket.emit(msg.type, ...args);
+                socket.emit(msg.name, ...args);
             }
         };
         Messenger.messageArrived.add(func);
         socket.on("disconnect", () => {
             Messenger.messageArrived.remove(func);
         });
-    })
+    });
 
     socketServer.on("", function () {
 
