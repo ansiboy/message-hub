@@ -10,12 +10,12 @@ export class HomeController {
     /**
      * 发送消息
      * @param d 请求参数
-     * @param d.type 消息类型
+     * @param d.name 消息名称
      * @param dc.data 消息数据
      */
     @action()
-    async sendMessage(@dataContext dc: MyDataContext, @routeData d: { type: string, data: any }) {
-        if (!d.type) throw errors.argumentFieldNull("type", "d");
+    async sendMessage(@dataContext dc: MyDataContext, @routeData d: { name: string, data: any }) {
+        if (!d.name) throw errors.argumentFieldNull("name", "d");
 
         d.data = d.data || {};
 
@@ -32,7 +32,7 @@ export class HomeController {
         let cms = clients.map(o => ({
             id: guid(),
             createDateTime: new Date(Date.now()),
-            type: item.type,
+            name: item.name,
             to: o.name,
             data: item.data,
             received: false,

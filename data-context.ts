@@ -8,7 +8,7 @@ export class Message {
     id: string;
 
     @Column({ type: "varchar", length: "30" })
-    type: string;
+    name: string;
 
     @Column({ type: "json" })
     data: any;
@@ -27,7 +27,7 @@ export class ClientMessage {
     id: string;
 
     @Column({ type: "varchar", length: "30" })
-    type: string;
+    name: string;
 
     @Column({ type: "json" })
     data: any;
