@@ -36,20 +36,16 @@ export async function start(config: Config) {
         }
 
         let func = (msg: ClientMessage) => {
-            if (msg.to == clientName) {
-                let args: EmitArguments = [msg.data, msg.id];
-                socket.emit(msg.name, ...args);
-            }
+            // if (msg.to == clientName) {
+            let args: EmitArguments = [msg.data, msg.id];
+            socket.emit(msg.name, ...args);
+            // }
         };
         Messenger.messageArrived.add(func);
         socket.on("disconnect", () => {
             Messenger.messageArrived.remove(func);
         });
     });
-
-    socketServer.on("", function () {
-
-    })
 }
 
 
