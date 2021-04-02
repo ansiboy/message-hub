@@ -1,4 +1,4 @@
-import { Column, DataContext, DataHelper, Entity, EntityManager, PrimaryColumn, Repository } from "maishu-node-data";
+import { Column, ConnectionOptions, DataContext, DataHelper, Entity, EntityManager, PrimaryColumn, Repository } from "maishu-node-data";
 import { createParameterDecorator } from "maishu-node-mvc";
 import { Config, ContextData } from "./declare";
 
@@ -79,15 +79,12 @@ export class MyDataContext extends DataContext {
 
 export let dataContext = createParameterDecorator<MyDataContext, ContextData>(async (ctx) => {
     if (ctx.data == null) throw new Error("Context data is null.");
-
-    let db = Object.assign({ entities: ["./data-context.js"] }, ctx.data.config.db);
-    let dc = DataHelper.createDataContext(MyDataContext, db);
+    let dc = createDataContext(ctx.data.config.db);
     return dc;
 })
 
-export function createDataContext(config: Config) {
-    let db = Object.assign({ entities: ["./data-context.js"] } as typeof config.db,
-        config.db);
+export function createDataContext(db: ConnectionOptions) {
+    db = Object.assign({ entities: [Message, ClientMessage, Client] }, db);
     let dc = DataHelper.createDataContext(MyDataContext, db);
     return dc;
 }

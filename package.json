@@ -20,7 +20,7 @@
         "yargs": "^16.2.0"
     },
     "bin": {
-        "message-hub": "./cli.js"
+        "message-hub": "./out/cli.js"
     },
     "devDependencies": {
         "@types/babel__core": "^7.1.12",

@@ -1,5 +1,5 @@
 import { describe } from "mocha";
-import { HeaderNames } from "../static/header-names";
+import { HeaderNames } from "../out/static/header-names";
 import { io } from "socket.io-client";
 import * as http from "http";
 import { Callback, errors } from "maishu-toolkit";

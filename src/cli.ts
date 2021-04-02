@@ -9,8 +9,8 @@ import { Config, start as startServer } from "./index";
 import { ConnectionConfig, createConnection } from "mysql";
 import { MyDataContext } from "./data-context";
 
-const configFilePath = path.join(__dirname, "config.json");
-const pkg = require("./package.json");
+const configFilePath = path.join(__dirname, "../config.json");
+const pkg = require("../package.json");
 console.assert(pkg != null);
 console.assert(pkg.name != null);
 

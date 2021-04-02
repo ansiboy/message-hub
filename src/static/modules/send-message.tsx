@@ -5,14 +5,14 @@ import { getMessages } from "../messages";
 
 let service = new MyService();
 let messages = getMessages();
-let messageNames = Object.getOwnPropertyNames(messages);
+let messageNames = Object.getOwnPropertyNames(messages) as (keyof typeof messages)[];
 
 interface Props {
 
 }
 
 interface State {
-    currentMessageName: string,
+    currentMessageName: keyof typeof messages,
 }
 
 export default class IndexPage extends React.Component<Props, State> {
@@ -45,7 +45,7 @@ export default class IndexPage extends React.Component<Props, State> {
                             value={this.state.currentMessageName || ""}
                             ref={e => this.typeInput = e || this.typeInput}
                             onChange={e => {
-                                this.setState({ currentMessageName: e.target.value })
+                                this.setState({ currentMessageName: e.target.value as any })
                             }}>
                             {messageNames.map(o => <option key={o} value={o}>
                                 {o}
@@ -66,7 +66,8 @@ export default class IndexPage extends React.Component<Props, State> {
                             ref={e => this.contentInput = e || this.contentInput}
                             value={JSON.stringify(messages[this.state.currentMessageName], null, "    ")}
                             onChange={e => {
-                                messages[this.state.currentMessageName] = e.target.value;
+                                messages[this.state.currentMessageName] = JSON.parse(e.target.value);
+                                this.setState({});
                             }} />
                     </div>
                 </div>
