@@ -37,7 +37,7 @@ export class ClientMessage {
 
     /** 接收此信息的客户端名称 */
     @Column({ name: "to", type: "varchar", length: 50 })
-    to: string;
+    to?: string;
 
     /** 信息是否已经接收 */
     @Column({ type: "bit", default: false })
