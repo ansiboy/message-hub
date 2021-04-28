@@ -1,9 +1,10 @@
 import * as React from "react";
-declare let messages: import("../messages").Messages;
 interface Props {
 }
 interface State {
-    currentMessageName: keyof typeof messages;
+    messageName: string;
+    messageContent: string;
+    custom: boolean;
 }
 export default class IndexPage extends React.Component<Props, State> {
     private typeInput;

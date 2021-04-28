@@ -5,14 +5,16 @@ import { getMessages } from "../messages";
 
 let service = new MyService();
 let messages = getMessages();
-let messageNames = Object.getOwnPropertyNames(messages) as (keyof typeof messages)[];
+let messageNames = Object.getOwnPropertyNames(messages);
 
 interface Props {
 
 }
 
 interface State {
-    currentMessageName: keyof typeof messages,
+    messageName: string,
+    messageContent: string,
+    custom: boolean,
 }
 
 export default class IndexPage extends React.Component<Props, State> {
@@ -24,7 +26,9 @@ export default class IndexPage extends React.Component<Props, State> {
         super(props);
 
         this.state = {
-            currentMessageName: messageNames[0]
+            messageName: messageNames[0],
+            messageContent: JSON.stringify(messages[messageNames[0]], null, "    "),
+            custom: false
         };
     }
 
@@ -34,6 +38,7 @@ export default class IndexPage extends React.Component<Props, State> {
     }
 
     render() {
+        let { custom, messageName, messageContent } = this.state;
         return <div className="container">
             <h2>发送消息</h2>
             <hr />
@@ -41,16 +46,22 @@ export default class IndexPage extends React.Component<Props, State> {
                 <div className="form-group">
                     <label className="col-sm-2 control-label">消息类型</label>
                     <div className="col-sm-10">
-                        <select className="form-control"
-                            value={this.state.currentMessageName || ""}
-                            ref={e => this.typeInput = e || this.typeInput}
-                            onChange={e => {
-                                this.setState({ currentMessageName: e.target.value as any })
-                            }}>
-                            {messageNames.map(o => <option key={o} value={o}>
-                                {o}
-                            </option>)}
-                        </select>
+                        {custom ?
+                            <input className="form-control" value={messageName || ""}
+                                onChange={e => {
+                                    this.setState({ messageName: e.target.value })
+                                }} /> :
+                            <select className="form-control"
+                                value={messageName || ""}
+                                ref={e => this.typeInput = e || this.typeInput}
+                                onChange={e => {
+                                    messageContent = messages[messageName] ? JSON.stringify(messages[messageName], null, "    ") : "";
+                                    this.setState({ messageName: e.target.value as any, messageContent })
+                                }}>
+                                {messageNames.map(o => <option key={o} value={o}>
+                                    {o}
+                                </option>)}
+                            </select>}
                     </div>
                 </div>
                 <div className="form-group">
@@ -64,16 +75,24 @@ export default class IndexPage extends React.Component<Props, State> {
                     <div className="col-sm-10">
                         <textarea className="form-control" style={{ height: 200 }}
                             ref={e => this.contentInput = e || this.contentInput}
-                            value={JSON.stringify(messages[this.state.currentMessageName], null, "    ")}
+                            value={messageContent || ""}
                             onChange={e => {
-                                messages[this.state.currentMessageName] = JSON.parse(e.target.value);
-                                this.setState({});
+                                // messages[currentMessageName] = JSON.parse(e.target.value);
+                                this.setState({ messageContent: e.target.value });
                             }} />
                     </div>
                 </div>
 
                 <div className="form-group text-right">
-                    <div className="col-sm-12">
+                    <div className="col-sm-10 col-md-offset-2">
+                        <div className="checkbox pull-left">
+                            <label>
+                                <input type="checkbox" checked={custom}
+                                    onChange={e => {
+                                        this.setState({ custom: e.target.checked })
+                                    }} /> 自定义消息
+                            </label>
+                        </div>
                         <button className="btn btn-primary" onClick={() => this.sendMessage()}
                             ref={e => {
                                 if (!e) return;

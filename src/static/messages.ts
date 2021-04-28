@@ -1,25 +1,30 @@
 import { guid } from "maishu-toolkit";
+import { sampleData } from "./sample-data";
 
 type Order = {};
 export type Messages = {
     Payment: { type: "Paypal" | "CreditCard", amount: number },
     OrderPaid: { order: Order },
+    /** 已发货 */
     Delivered: { orderId: string },
+    Refund: {
+        orderId: string,
+        orderDetails: {
+            /** 产品编号 */
+            productId: string,
+            /** 该产品退款总退款金额 */
+            amount: number,
+            /** 退货数量 */
+            quantity: number,
+        }[],
+        /** 退款总金额 */
+        total: number,
+        data?: any,
+    }
 };
 
 
-export function getMessages() {
+export function getMessages(): { [name: string]: any } {
 
-    let messages: Messages = {
-        Payment: {
-            type: "Paypal",     // 支付类型
-            amount: 109,     // 支付金额
-        },
-        OrderPaid: {
-            order: {}
-        },
-        Delivered: { orderId: guid() }
-    }
-
-    return messages;
+    return sampleData;
 }
