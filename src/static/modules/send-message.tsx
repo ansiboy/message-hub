@@ -34,7 +34,8 @@ export default class IndexPage extends React.Component<Props, State> {
 
     private async sendMessage() {
         let obj = JSON.parse(this.contentInput.value);
-        return service.sendMessage(this.typeInput.value, obj);
+        let messageName = this.state.messageName;
+        return service.sendMessage(messageName, obj);
     }
 
     render() {
@@ -62,6 +63,15 @@ export default class IndexPage extends React.Component<Props, State> {
                                     {o}
                                 </option>)}
                             </select>}
+                    </div>
+                </div>
+                <div className="form-group">
+                    <label className="col-sm-2 control-label">消息类型</label>
+                    <div className="col-sm-10">
+                        <input className="form-control" value={messageName || ""}
+                            onChange={e => {
+                                this.setState({ messageName: e.target.value })
+                            }} />
                     </div>
                 </div>
                 <div className="form-group">
