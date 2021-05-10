@@ -56,7 +56,7 @@ export default class IndexPage extends React.Component<Props, State> {
                                 value={messageName || ""}
                                 ref={e => this.typeInput = e || this.typeInput}
                                 onChange={e => {
-                                    messageContent = messages[messageName] ? JSON.stringify(messages[messageName], null, "    ") : "";
+                                    messageContent = messages[e.target.value] ? JSON.stringify(messages[e.target.value], null, "    ") : "";
                                     this.setState({ messageName: e.target.value as any, messageContent })
                                 }}>
                                 {messageNames.map(o => <option key={o} value={o}>
