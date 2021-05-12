@@ -1,12 +1,13 @@
-export default {
-    "requirejs": {
-        "paths": {
-            "bootstrap-css": "node_modules/bootstrap/dist/css/bootstrap",
-            "socket.io-client": "socket.io/socket.io",
+import { WebsiteConfig } from "maishu-chitu-scaffold/static/types";
+
+let w: WebsiteConfig = {
+    requirejs: {
+        paths: {
+            "bootstrap-css": "node_modules/bootstrap/dist/css/bootstrap.min.css",
+            "socket.io-client": "node_modules/socket.io-client/dist/socket.io.min"
         }
     },
-    "containers": {
-        "simple": [],
-        "blank": []
-    }
+    mode: "production",
 }
+
+export default w;

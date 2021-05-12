@@ -1,13 +1,3 @@
-declare const _default: {
-    requirejs: {
-        paths: {
-            "bootstrap-css": string;
-            "socket.io-client": string;
-        };
-    };
-    containers: {
-        simple: never[];
-        blank: never[];
-    };
-};
-export default _default;
+import { WebsiteConfig } from "maishu-chitu-scaffold/static/types";
+declare let w: WebsiteConfig;
+export default w;
