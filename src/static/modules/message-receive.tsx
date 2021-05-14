@@ -29,9 +29,10 @@ export default class MessageReceivePage extends React.Component<Props, State> {
 
         let { time, message, name } = this.state || {};
 
-        return <div className="container">
-            <h2>消息接收</h2>
-            <hr />
+        return <>
+            {/* <div className="container">
+                <h2>消息接收</h2>
+                <hr /> */}
             {this.state ? <div className="form-horizontal">
                 <div className="form-group">
                     <label className="col-sm-2 control-label">接收时间</label>
@@ -56,6 +57,7 @@ export default class MessageReceivePage extends React.Component<Props, State> {
             </div> :
                 <h4 className="text-center" style={{ margin: "100px 0 100px 0" }}>暂无消息</h4>
             }
-        </div>
+            {/* </div> */}
+        </>
     }
 }

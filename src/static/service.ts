@@ -1,15 +1,22 @@
 import { Service } from "maishu-chitu-service";
+import { DataSourceArguments, DataSourceSelectArguments, DataSourceSelectResult } from "maishu-wuzhui-helper";
 import * as ui from "maishu-ui-toolkit";
+import { ClientMessage } from "../data-context";
 
-export class MyService {
-    private service: Service;
+export class MyService extends Service {
 
     constructor() {
-        this.service = new Service(err => errorHandle(err));
+        super(err => errorHandle(err));
+
     }
 
     sendMessage(name: string, data: any) {
-        return this.service.postByJson("sendMessage", { name, data });
+        return this.postByJson("sendMessage", { name, data });
+    }
+
+    messageList(args: DataSourceSelectArguments) {
+        let url = "message/list";
+        return this.postByJson<DataSourceSelectResult<ClientMessage>>(url, { args });
     }
 }
 
