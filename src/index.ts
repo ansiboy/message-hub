@@ -5,7 +5,7 @@ import { Config, ContextData } from "./declare";
 import { ClientMessage } from "./data-context";
 import { HeaderNames } from "./static/header-names";
 import { Messenger } from "./messenger";
-import { getVirtualPaths } from "maishu-chitu-scaffold";
+import { getVirtualPaths } from "maishu-admin-scaffold";
 import * as path from "path";
 export { Config } from "./declare";
 
@@ -16,11 +16,9 @@ export async function start(config: Config) {
     if (!config) throw errors.argumentNull("config");
     if (!config.port) throw errors.argumentFieldNull("port", "config");
 
-    let virtualPaths = getVirtualPaths("static");
-    // delete virtualPaths["static/init.ts"];
-    // delete virtualPaths["static/website-config.ts"];
+    let virtualPaths = getVirtualPaths("static", path.join(__dirname, "static"));
     virtualPaths["node_modules"] = path.join(__dirname, "../node_modules");
-
+    
     let data: ContextData = { config };
     let webServer = startServer({
         websiteDirectory: __dirname,

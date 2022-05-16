@@ -40,9 +40,10 @@ export default class IndexPage extends React.Component<Props, State> {
 
     render() {
         let { custom, messageName, messageContent } = this.state;
-        return <div className="container">
-            <h2>发送消息</h2>
-            <hr />
+        return <>
+            {/* <div className="container">
+                <h2>发送消息</h2>
+                <hr /> */}
             <div className="form-horizontal">
                 <div className="form-group">
                     <label className="col-sm-2 control-label">消息类型</label>
@@ -63,15 +64,6 @@ export default class IndexPage extends React.Component<Props, State> {
                                     {o}
                                 </option>)}
                             </select>}
-                    </div>
-                </div>
-                <div className="form-group">
-                    <label className="col-sm-2 control-label">消息类型</label>
-                    <div className="col-sm-10">
-                        <input className="form-control" value={messageName || ""}
-                            onChange={e => {
-                                this.setState({ messageName: e.target.value })
-                            }} />
                     </div>
                 </div>
                 <div className="form-group">
@@ -114,6 +106,7 @@ export default class IndexPage extends React.Component<Props, State> {
                     </div>
                 </div>
             </div>
-        </div>
+            {/* </div> */}
+        </>
     }
 }

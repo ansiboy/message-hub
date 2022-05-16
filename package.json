@@ -7,12 +7,21 @@
         "bootstrap": "^3.3.7",
         "colors": "^1.4.0",
         "inquirer": "^7.3.3",
+<<<<<<< HEAD
         "maishu-admin-scaffold": "^1.13.1",
+=======
+        "maishu-admin-scaffold": "^1.12.0",
+>>>>>>> 69d11bba2820db164a50689b409ac047f5e73cc9
         "maishu-chitu-react": "^1.27.0",
-        "maishu-chitu-scaffold": "^1.9.1",
+        "maishu-chitu-scaffold": "^1.21.0",
         "maishu-chitu-service": "^1.21.0",
+        "maishu-data-page": "^1.0.11",
         "maishu-node-data": "^1.6.0",
         "maishu-node-mvc": "^2.19.1",
+<<<<<<< HEAD
+=======
+        "maishu-nws-js": "^1.3.4",
+>>>>>>> 69d11bba2820db164a50689b409ac047f5e73cc9
         "maishu-requirejs-plugins": "^1.3.0",
         "maishu-toolkit": "^1.6.1",
         "maishu-ui-toolkit": "^1.9.0",
@@ -24,9 +33,9 @@
         "message-hub": "./out/cli.js"
     },
     "devDependencies": {
-        "@babel/plugin-transform-modules-amd": "^7.13.0",
+        "@babel/plugin-transform-modules-amd": "^7.14.0",
         "@babel/plugin-transform-typescript": "^7.13.0",
-        "@babel/preset-env": "^7.13.10",
+        "@babel/preset-env": "^7.14.1",
         "@types/babel__core": "^7.1.12",
         "@types/inquirer": "^7.3.1",
         "@types/mocha": "^8.2.0",
