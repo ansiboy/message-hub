@@ -13,7 +13,7 @@ export declare class ClientMessage {
     data: any;
     createDateTime: Date;
     /** 接收此信息的客户端名称 */
-    to: string;
+    to?: string;
     /** 信息是否已经接收 */
     received: boolean;
 }
