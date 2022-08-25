@@ -7,6 +7,7 @@ import { HeaderNames } from "./static/header-names";
 import { Messenger } from "./messenger";
 import { getVirtualPaths } from "maishu-admin-scaffold";
 import * as path from "path";
+import * as http from "http";
 export { Config } from "./declare";
 
 type EmitArguments = [any, string];
@@ -18,7 +19,7 @@ export async function start(config: Config) {
 
     let virtualPaths = getVirtualPaths("static", path.join(__dirname, "static"));
     virtualPaths["node_modules"] = path.join(__dirname, "../node_modules");
-    
+
     let data: ContextData = { config };
     let webServer = startServer({
         websiteDirectory: __dirname,
@@ -27,7 +28,9 @@ export async function start(config: Config) {
         virtualPaths
     }, "mvc");
 
-    let socketServer = new io.Server(webServer.source);
+    debugger;
+
+    let socketServer = new io.Server(webServer.source as http.Server);
     socketServer.on("connection", function (socket: io.Socket) {
         let clientName = socket.request.headers[HeaderNames.clientName];
         if (!clientName) {

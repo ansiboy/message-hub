@@ -4,7 +4,7 @@ import { HeaderNames } from "../header-names";
 
 let extraHeaders: ManagerOptions["extraHeaders"] = {};
 extraHeaders[HeaderNames.clientName] = "settlement";
-
+debugger;
 const socket = io(`http://${location.host}/`, { extraHeaders });
 
 interface Props {
@@ -49,9 +49,8 @@ export default class MessageReceivePage extends React.Component<Props, State> {
                 <div className="form-group">
                     <label className="col-sm-2 control-label">消息内容</label>
                     <div className="col-sm-10">
-                        <pre>
-                            {JSON.stringify(message, null, "    ")}
-                        </pre>
+                        <textarea className="form-control" style={{ height: 300 }} value={JSON.stringify(message, null, "    ")} readOnly={true}>
+                        </textarea>
                     </div>
                 </div>
             </div> :

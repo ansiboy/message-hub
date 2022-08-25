@@ -27,19 +27,6 @@ export class HomeController {
 
         await dc.messages.insert(item);
 
-        let clients = await dc.clients.find();
-
-        // let cms = clients.map(o => ({
-        //     id: guid(),
-        //     createDateTime: new Date(Date.now()),
-        //     name: item.name,
-        //     to: o.name,
-        //     data: item.data,
-        //     received: false,
-        // } as ClientMessage));
-
-        // await dc.clientMessages.insert(cms);
-        // cms.forEach(c => {
         let c: ClientMessage = {
             id: guid(),
             createDateTime: new Date(Date.now()),
@@ -48,7 +35,6 @@ export class HomeController {
             received: false,
         };
         Messenger.messageArrived.fire(c);
-        // })
 
         return { id: item.id };
     }
